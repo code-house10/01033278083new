@@ -71,7 +71,7 @@
             padding: 0 15px;
         }
 
-        .btn {
+        .btn { /* This class might be phased out or used for non-call buttons if any remain */
             display: inline-block;
             padding: 12px 30px;
             border-radius: 5px;
@@ -102,6 +102,29 @@
             background-color: var(--white);
             color: var(--primary-color);
         }
+
+        /* NEW UNIVERSAL CALL TRIGGER STYLE */
+        .universal-call-trigger-style {
+            display: inline-block;
+            padding: 10px 20px; /* Default padding, can be adjusted */
+            background-color: var(--primary-color);
+            color: var(--white) !important; /* Ensure text is white for contrast */
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+
+        .universal-call-trigger-style:hover {
+            background-color: #A52A2A; /* A darker shade of the primary color */
+            color: var(--white) !important;
+            transform: translateY(-1px); /* Slight lift effect */
+        }
+        /* END NEW UNIVERSAL CALL TRIGGER STYLE */
+
 
         .section-title {
             text-align: center;
@@ -145,10 +168,11 @@
             align-items: center;
         }
 
-        .phone-number {
+        /* .phone-number class styling might be overridden by universal-call-trigger-style */
+        .phone-number { 
             font-size: 1.2rem;
             font-weight: 700;
-            color: var(--green);
+            /* color: var(--green); */ /* Color will be handled by universal-call-trigger-style */
             margin-left: 15px;
         }
 
@@ -192,9 +216,7 @@
         }
 
         .logo img {
-            /* Added for image logo */
             height: 50px;
-            /* Adjust as needed */
             width: auto;
         }
 
@@ -217,12 +239,17 @@
             position: relative;
             padding: 5px 0;
         }
+        /* Ensure universal-call-trigger-style in nav doesn't break layout */
+        .nav-menu a.universal-call-trigger-style {
+            padding: 8px 15px; /* Adjust padding for nav if needed */
+        }
 
-        .nav-menu a:hover {
+
+        .nav-menu a:not(.universal-call-trigger-style):hover { /* Exclude styled button from this hover */
             color: var(--primary-color);
         }
 
-        .nav-menu a::after {
+        .nav-menu a:not(.universal-call-trigger-style)::after { /* Exclude styled button from this underline */
             content: '';
             position: absolute;
             bottom: 0;
@@ -233,7 +260,7 @@
             transition: width 0.3s ease;
         }
 
-        .nav-menu a:hover::after {
+        .nav-menu a:not(.universal-call-trigger-style):hover::after {
             width: 100%;
             right: auto;
             left: 0;
@@ -250,7 +277,6 @@
         .hero {
             position: relative;
             height: 600px;
-            /* Can be vh too, e.g., 80vh */
             overflow: hidden;
         }
 
@@ -280,7 +306,6 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            /* Darker overlay for better text readability */
         }
 
         .hero-content {
@@ -288,22 +313,18 @@
             z-index: 1;
             color: var(--white);
             max-width: 700px;
-            /* Increased width */
             padding: 0 20px;
         }
 
         .hero-content h1 {
             font-size: 3.5rem;
-            /* Adjust as needed */
             font-weight: 800;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            /* Text shadow for readability */
         }
 
         .hero-content p {
             font-size: 1.3rem;
-            /* Increased size */
             margin-bottom: 30px;
             line-height: 1.7;
         }
@@ -312,6 +333,11 @@
             display: flex;
             gap: 15px;
         }
+        /* Ensure hero buttons with new style look good */
+        .hero-buttons .universal-call-trigger-style, .hero-buttons .btn-secondary {
+             padding: 12px 30px; /* Match original .btn padding */
+        }
+
 
         .slider-controls {
             position: absolute;
@@ -352,7 +378,6 @@
             height: 50px;
             border-radius: 50%;
             background-color: rgba(139, 0, 0, 0.5);
-            /* Primary color with alpha */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -375,7 +400,6 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            /* Responsive grid */
             gap: 30px;
         }
 
@@ -407,7 +431,6 @@
         }
 
         .feature-icon img {
-            /* For image icons */
             width: 50px;
             height: 50px;
             object-fit: contain;
@@ -423,11 +446,9 @@
         .why-choose-us {
             padding: 60px 0;
             background-image: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.85)), url("https://raw.githubusercontent.com/code-house10/images/refs/heads/main/1213.jpg");
-            /* Example relevant image */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            /* Parallax effect */
             color: var(--white);
         }
 
@@ -452,6 +473,11 @@
             font-size: 1.1rem;
             line-height: 1.8;
         }
+         /* Ensure why-choose-us button with new style looks good */
+        .why-choose-text .universal-call-trigger-style {
+             padding: 12px 30px; /* Match original .btn padding */
+        }
+
 
         .why-choose-cards {
             flex: 1;
@@ -472,7 +498,6 @@
         .why-choose-card:hover {
             transform: translateY(-5px);
             background-color: rgba(139, 0, 0, 0.3);
-            /* Primary color on hover */
         }
 
         .why-choose-card h3 {
@@ -494,7 +519,6 @@
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            /* Responsive */
             gap: 30px;
         }
 
@@ -513,30 +537,25 @@
 
         .service-img {
             height: 220px;
-            /* Increased height */
             background-color: var(--light-gray);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            /* To contain image */
         }
 
         .service-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Ensures image covers the area */
         }
 
         .service-content {
             padding: 25px;
-            /* Increased padding */
         }
 
         .service-content h3 {
             font-size: 1.6rem;
-            /* Increased size */
             margin-bottom: 15px;
             color: var(--primary-color);
         }
@@ -544,32 +563,21 @@
         .service-content p {
             margin-bottom: 20px;
             font-size: 1rem;
-            /* Slightly larger */
         }
 
-        .service-btn {
-            color: var(--primary-color);
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            border: 1px solid var(--primary-color);
-            padding: 8px 15px;
-            border-radius: 5px;
+        .service-content .universal-call-trigger-style {
+            padding: 8px 15px; /* Match original .service-btn padding */
+            display: inline-flex; /* For icon alignment */
+            align-items: center; /* For icon alignment */
+        }
+        .service-content .universal-call-trigger-style i {
+             margin-left: 5px; /* RTL: icon before text, so margin-left */
+             transition: transform 0.3s ease;
+        }
+        .service-content .universal-call-trigger-style:hover i {
+            transform: translateX(-5px); /* RTL: move icon left on hover */
         }
 
-        .service-btn:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        .service-btn i {
-            margin-right: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        .service-btn:hover i {
-            transform: translateX(5px);
-        }
 
         /* Areas We Serve Section */
         .areas-serve {
@@ -626,7 +634,6 @@
         .testimonials {
             padding: 60px 0;
             background-color: #fdfdfd;
-            /* Slightly off-white */
         }
 
         .testimonials-slider {
@@ -639,14 +646,11 @@
         .testimonial-slide {
             display: none;
             padding: 40px;
-            /* Increased padding */
             background-color: var(--white);
             border-radius: 10px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-            /* Softer shadow */
             text-align: center;
             border-left: 5px solid var(--primary-color);
-            /* Accent border */
         }
 
         .testimonial-slide.active {
@@ -670,19 +674,15 @@
             font-size: 1.1rem;
             line-height: 1.8;
             margin-bottom: 25px;
-            /* Increased margin */
             position: relative;
             font-style: italic;
         }
 
         .testimonial-content::before {
-            /* Using FontAwesome quotes */
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
             content: "\f10d";
-            /* fa-quote-left */
             font-size: 1.5rem;
-            /* Adjusted size */
             color: var(--primary-color);
             opacity: 0.5;
             position: absolute;
@@ -694,7 +694,6 @@
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
             content: "\f10e";
-            /* fa-quote-right */
             font-size: 1.5rem;
             color: var(--primary-color);
             opacity: 0.5;
@@ -711,7 +710,6 @@
 
         .author-avatar {
             width: 70px;
-            /* Increased size */
             height: 70px;
             border-radius: 50%;
             background-color: var(--light-gray);
@@ -720,10 +718,8 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            /* Increased size */
             color: var(--primary-color);
             overflow: hidden;
-            /* For image */
         }
 
         .author-avatar img {
@@ -734,14 +730,12 @@
 
         .author-info h4 {
             font-size: 1.3rem;
-            /* Increased size */
             color: var(--primary-color);
             font-weight: 700;
         }
 
         .author-info p {
             font-size: 0.95rem;
-            /* Slightly larger */
             color: var(--dark-gray);
         }
 
@@ -774,7 +768,6 @@
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            /* Responsive */
             gap: 30px;
         }
 
@@ -793,7 +786,6 @@
 
         .blog-img {
             height: 200px;
-            /* Increased height */
             background-color: var(--light-gray);
             display: flex;
             align-items: center;
@@ -820,11 +812,9 @@
 
         .blog-content h3 {
             font-size: 1.4rem;
-            /* Increased size */
             margin-bottom: 10px;
             line-height: 1.4;
             color: var(--secondary-color);
-            /* Dark blue for blog titles */
         }
 
         .blog-content p {
@@ -853,22 +843,18 @@
         .footer {
             background-color: var(--secondary-color);
             color: rgba(255, 255, 255, 0.8);
-            /* Softer white */
             padding: 60px 0 0;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            /* Responsive */
             gap: 40px;
-            /* Increased gap */
         }
 
         .footer-column h3 {
             font-size: 1.5rem;
             margin-bottom: 25px;
-            /* Increased margin */
             color: var(--white);
             position: relative;
             padding-bottom: 10px;
@@ -881,7 +867,6 @@
             right: 0;
             width: 50px;
             height: 3px;
-            /* Thicker line */
             background-color: var(--primary-color);
         }
 
@@ -896,7 +881,6 @@
         }
 
         .footer-logo img {
-            /* For image logo in footer */
             height: 40px;
             width: auto;
         }
@@ -908,14 +892,19 @@
 
         .footer-links li {
             margin-bottom: 12px;
-            /* Increased margin */
         }
 
         .footer-links a {
             transition: color 0.3s ease, padding-right 0.3s ease;
         }
+         /* Ensure footer call button with new style looks good, adjust if it's just text */
+        .footer-contact .universal-call-trigger-style {
+            padding: 5px 10px; /* Smaller padding for text-like button */
+            font-weight: normal; /* Less bold if it was just text */
+        }
 
-        .footer-links a:hover {
+
+        .footer-links a:not(.universal-call-trigger-style):hover {
             color: var(--primary-color);
             padding-right: 5px;
         }
@@ -923,14 +912,13 @@
         .footer-contact li {
             margin-bottom: 15px;
             display: flex;
-            align-items: flex-start;
+            align-items: flex-start; 
         }
 
         .footer-contact i {
             margin-left: 10px;
             color: var(--primary-color);
             margin-top: 4px;
-            /* Align icon better */
         }
 
         .footer-social {
@@ -959,7 +947,6 @@
         .copyright {
             text-align: center;
             padding: 25px 0;
-            /* Increased padding */
             margin-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
@@ -986,8 +973,6 @@
 
         /* Responsive Styles */
         @media (max-width: 1024px) {
-
-            /* .features-grid, .blog-grid, .footer-content already responsive */
             .section-title h2 {
                 font-size: 2.2rem;
             }
@@ -996,7 +981,6 @@
         @media (max-width: 768px) {
             .hero {
                 height: auto;
-                /* Auto height for content */
                 min-height: 500px;
             }
 
@@ -1029,21 +1013,16 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                /* Start off-screen */
                 width: 75%;
-                /* Adjust width */
                 max-width: 320px;
                 height: 100vh;
                 background-color: var(--white);
                 flex-direction: column;
                 padding: 80px 30px 30px;
-                /* Adjust padding */
                 transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-                /* Smoother transition */
                 box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
                 z-index: 1001;
                 overflow-y: auto;
-                /* For many menu items */
             }
 
             .nav-menu.active {
@@ -1052,21 +1031,22 @@
 
             .nav-menu li {
                 margin: 0 0 25px 0;
-                /* Increased spacing */
             }
 
             .nav-menu a {
                 font-size: 1.1rem;
-                /* Larger font for mobile menu */
             }
+             .nav-menu a.universal-call-trigger-style {
+                width: 100%; 
+                padding: 10px 15px;
+            }
+
 
             .close-menu {
                 position: absolute;
                 top: 25px;
-                /* Adjust position */
                 left: 25px;
                 font-size: 1.8rem;
-                /* Larger close icon */
                 cursor: pointer;
                 color: var(--primary-color);
             }
@@ -1084,17 +1064,23 @@
 
         @media (max-width: 576px) {
             .top-header-content {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
+                flex-direction: row; /* MODIFIED for single row */
+                /* gap: 10px; */ /* Removed to rely on space-between from base or adjust if needed */
+                /* text-align: center; */ /* Removed as it was for column layout */
             }
+            /* .top-header .universal-call-trigger-style rule removed as it was for column layout */
 
             .contact-info {
-                justify-content: center;
+                /* justify-content: center; */ /* Removed */
+                flex-direction: row; /* MODIFIED for single row */
+                align-items: center; /* Added for vertical alignment of its items */
+                gap: 5px; /* Added for spacing between icon, text, and button */
             }
+            /* .contact-info i.fa-map-marker-alt rule removed */
+
 
             .social-links {
-                margin-top: 5px;
+                /* margin-top: 5px; */ /* Removed as it was for column layout */
             }
 
             .hero {
@@ -1115,12 +1101,15 @@
                 align-items: center;
             }
 
-            .btn {
+            .btn, .universal-call-trigger-style { 
                 width: 80%;
-                /* Adjust button width */
                 max-width: 300px;
                 padding: 10px 20px;
             }
+             .hero-buttons .universal-call-trigger-style, .hero-buttons .btn-secondary {
+                width: 80%; max-width: 300px; padding: 10px 20px;
+            }
+
 
             .section-title h2 {
                 font-size: 1.8rem;
@@ -1143,6 +1132,10 @@
             .why-choose-text h2 {
                 font-size: 1.8rem;
             }
+            .why-choose-text .universal-call-trigger-style {
+                width: 80%; max-width: 300px; padding: 10px 20px;
+            }
+
 
             .testimonial-content {
                 font-size: 1rem;
@@ -1168,7 +1161,6 @@
             }
 
             .logo img {
-                /* Adjust logo image size */
                 height: 40px;
             }
         }
@@ -1192,7 +1184,7 @@
             }
         }
 
-        /* --- UPDATED FLOATING CALL BUTTON STYLES --- */
+        /* --- FLOATING CALL BUTTON STYLES (Largely preserved for positioning and animation) --- */
         .floating-call-btn-left {
             position: fixed;
             left: 20px;
@@ -1200,15 +1192,13 @@
             z-index: 1050;
             display: flex;
             align-items: center;
-            background-color: var(--primary-color);
+            background-color: var(--primary-color); 
             color: var(--white);
             padding: 10px 15px;
-            /* Base padding */
             border-radius: 50px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             font-size: 1rem;
-            /* Base font size for text elements within */
             text-decoration: none;
         }
 
@@ -1216,80 +1206,45 @@
             transform: translateY(-3px) scale(1.03);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             background-color: #A52A2A;
-            /* Slightly darker shade */
         }
 
         .floating-btn-icon {
-            /* Styles for the <i> icon */
             font-size: 1.2rem;
             animation: pulse-call-animation 2s infinite ease-in-out;
-            /* In RTL, this icon is on the right of the text span that follows it in HTML. */
-            /* No margin needed here by default, space handled by .floating-btn-text's margin-right. */
         }
 
         .floating-btn-text {
-            /* Styles for the main text span */
             font-weight: 700;
             margin-right: 8px;
-            /* Space from the icon (which is to its right in HTML, so right-most in RTL flow) */
         }
 
         .floating-btn-action-text-part {
-            /* Styles for the "(إتصل الأن)" part */
-            /* Default display: inline. Space between number and this text is handled by a space in HTML. */
+            /* Default display: inline. */
         }
 
         @keyframes pulse-call-animation {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        /* Responsive adjustments for the floating button */
         @media (max-width: 768px) {
-
-            /* Tablet and smaller */
             .floating-call-btn-left {
                 padding: 8px 12px;
                 font-size: 0.9rem;
                 left: 15px;
                 bottom: 15px;
             }
-
-            .floating-btn-icon {
-                font-size: 1.1rem;
-            }
-
-            .floating-btn-text {
-                margin-right: 6px;
-            }
+            .floating-btn-icon { font-size: 1.1rem; }
+            .floating-btn-text { margin-right: 6px; }
         }
 
         @media (max-width: 480px) {
-
-            /* Small mobile */
-            .floating-btn-action-text-part {
-                display: none;
-                /* Hide "(إتصل الأن)" */
-            }
-
-            .floating-call-btn-left {
-                padding: 8px 10px;
-            }
-
-            /* .floating-btn-text will now only contain the number. */
-            /* Its font-size is 0.9rem from the 768px media query. */
+            .floating-btn-action-text-part { display: none; }
+            .floating-call-btn-left { padding: 8px 10px; }
         }
+        /* --- END OF FLOATING CALL BUTTON STYLES --- */
 
-        /* --- END OF UPDATED FLOATING CALL BUTTON STYLES --- */
 
         /* Universal Call Modal Styles */
         .call-modal-overlay {
@@ -1298,43 +1253,44 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
-            display: none; /* Hidden by default */
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none; 
             align-items: center;
             justify-content: center;
-            z-index: 2000; /* High z-index to be on top */
-            padding: 15px; /* Padding for smaller screens */
+            z-index: 2000; 
+            padding: 15px; 
+            opacity: 0; 
+            transition: opacity 0.3s ease-out;
+        }
+
+        .call-modal-overlay.active {
+            display: flex; 
+            opacity: 1; 
         }
 
         .call-modal-content {
             background-color: var(--white);
-            padding: 25px; /* Increased padding */
-            border-radius: 12px; /* More rounded corners */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Softer, larger shadow */
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
             width: 100%;
-            max-width: 450px; /* Slightly wider modal */
-            text-align: center; /* Center content by default */
-            transform: scale(0.95);
-            opacity: 0;
+            max-width: 450px; 
+            text-align: center; 
+            transform: scale(0.95); 
+            opacity: 0; 
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
         }
 
-        .call-modal-overlay.active {
-            display: flex;
-        }
         .call-modal-overlay.active .call-modal-content {
-            transform: scale(1);
-            opacity: 1;
+            transform: scale(1); 
+            opacity: 1; 
         }
 
-
-        /* Tailwind classes are used directly in the modal HTML for buttons, text etc. */
-        /* Customizing the success button color from the modal HTML */
         .bg-success {
-             background-color: var(--success-color) !important; /* Ensure this overrides Tailwind if needed */
+             background-color: var(--success-color) !important;
         }
         .bg-success:hover {
-            background-color: #218838 !important; /* Darker green on hover */
+            background-color: #218838 !important;
         }
     </style>
 </head>
@@ -1349,14 +1305,13 @@
                 <div class="top-header-content">
                     <div class="contact-info">
                         <i class="fas fa-map-marker-alt" style="margin-left: 8px;"></i> تغطية شاملة!
-                        <a href="tel:01033278083" class="phone-number call-trigger" style="margin-right:15px;">
+                        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style" style="margin-right:15px;">
                             <i class="fas fa-phone-alt"></i>
                             01033278083
                         </a>
                     </div>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        
                         <a href="https://wa.me/201033278083" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
@@ -1381,7 +1336,7 @@
                         <li><a href="#services">الخدمات</a></li>
                         <li><a href="#areas">مناطق الخدمة</a></li>
                         <li><a href="#blog">المدونة</a></li>
-                        <li><a href="tel:01033278083" class="call-trigger">اتصل بنا</a></li>
+                        <li><a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">اتصل بنا</a></li>
                     </ul>
                 </div>
             </div>
@@ -1395,7 +1350,7 @@
                     <h1>إنجز لنقل العفش والاثاث لنقل الأثاث في مدينة نصر والتجمع</h1>
                     <p>خبرة، أمان، والتزام في خدمتك. نقدم خدمات نقل الأثاث بأعلى مستويات الجودة في جميع أنحاء القاهرة والجيزة. فك وتركيب وتغليف احترافي.</p>
                     <div class="hero-buttons">
-                        <a href="tel:01033278083" class="btn btn-primary call-trigger">اتصل بنا الآن: 01033278083</a>
+                        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">اتصل بنا الآن: 01033278083</a>
                         <a href="#services" class="btn btn-secondary">اكتشف خدماتنا</a>
                     </div>
                 </div>
@@ -1407,7 +1362,7 @@
                     <h1>نقل عفش آمن وسريع لمصر الجديدة ومدينتي</h1>
                     <p>نوفر خدمات الفك والتركيب والتغليف والنقل بأحدث المعدات وأفضل الكوادر المدربة. نصلك أينما كنت في الرحاب والشيخ زايد أيضًا.</p>
                     <div class="hero-buttons">
-                        <a href="tel:01033278083" class="btn btn-primary call-trigger">اطلب عرض سعر مجاني</a>
+                        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">اطلب عرض سعر مجاني</a>
                         <a href="#why-choose-us" class="btn btn-secondary">لماذا تختارنا؟</a>
                     </div>
                 </div>
@@ -1420,7 +1375,7 @@
                     <p>نقدم أفضل الأسعار مع ضمان جودة الخدمة وسلامة منقولاتك من الباب إلى الباب. خدمة نقل عفش للمهندسين والدقي والعجوزة.</p>
                     <div class="hero-buttons">
                         <a href="https://wa.me/201033278083" class="btn btn-primary" style="background-color: var(--green); border-color: var(--green);"><i class="fab fa-whatsapp" style="margin-left: 8px;"></i>تواصل عبر واتساب</a>
-                        <a href="tel:01033278083" class="btn btn-secondary call-trigger">معلومات الاتصال</a>
+                        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">معلومات الاتصال</a>
                     </div>
                 </div>
             </div>
@@ -1485,7 +1440,7 @@
                     <h2>من نحن؟ شركة إنجز لنقل العفش والاثاث لخدمات نقل الأثاث المتكاملة</h2>
                     <p>شركة إنجز لنقل العفش والاثاث لنقل الأثاث هي رائدة شركات نقل العفش في مصر، بخبرة تمتد لسنوات طويلة في تقديم خدمات نقل أثاث شاملة وموثوقة لعملائنا الكرام في جميع أنحاء القاهرة والجيزة، بما في ذلك مدينة نصر، التجمع الخامس، مصر الجديدة، مدينتي، الرحاب، الشيخ زايد، المعادي، حلوان، المهندسين، الدقي، العجوزة، وغيرها من المناطق.</p>
                     <p>نحن نؤمن بأن نقل الأثاث ليس مجرد خدمة، بل هو مسؤولية كبيرة تتطلب الاهتمام بكل التفاصيل لضمان سلامة منقولاتك وممتلكاتك الثمينة. لذلك، نحرص على استخدام أحدث المعدات وأفضل مواد التغليف وفريق عمل مدرب بعناية.</p>
-                    <a href="tel:01033278083" class="btn btn-primary call-trigger">اتصل بنا للاستشارة المجانية</a>
+                    <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">اتصل بنا للاستشارة المجانية</a>
                 </div>
                 <div class="why-choose-cards">
                     <div class="why-choose-card">
@@ -1526,7 +1481,7 @@
                     <div class="service-content">
                         <h3>تغليف الأثاث باحترافية</h3>
                         <p>نستخدم أجود مواد التغليف (بابلز، كرتون، استرتش) لحماية كل قطعة أثاث وضمان وصولها سليمة إلى وجهتها الجديدة في مدينة نصر أو أي مكان آخر.</p>
-                        <a href="tel:01033278083" class="service-btn call-trigger">
+                        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">
                             <i class="fas fa-arrow-left"></i>
                             اطلب خدمة التغليف
                         </a>
@@ -1539,7 +1494,7 @@
                     <div class="service-content">
                         <h3>فك وتركيب الأثاث بدقة</h3>
                         <p>فريق من النجارين المحترفين لفك وتركيب جميع أنواع الأثاث (غرف نوم، مطابخ، مكيفات، ستائر) بحرفية عالية في التجمع الخامس ومصر الجديدة.</p>
-                        <a href="tel:01033278083" class="service-btn call-trigger">
+                        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">
                             <i class="fas fa-arrow-left"></i>
                             استفسر عن الفك والتركيب
                         </a>
@@ -1552,7 +1507,7 @@
                     <div class="service-content">
                         <h3>سيارات نقل عفش مجهزة</h3>
                         <p>أسطول من سيارات النقل المغلقة والمجهزة بأحجام مختلفة لنقل أثاثك بأمان وسرعة إلى مدينتي، الرحاب، الشيخ زايد، وكل أنحاء القاهرة.</p>
-                        <a href="tel:01033278083" class="service-btn call-trigger">
+                        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">
                             <i class="fas fa-arrow-left"></i>
                             احجز سيارة نقل
                         </a>
@@ -1565,7 +1520,7 @@
                     <div class="service-content">
                         <h3>تخزين الأثاث الآمن</h3>
                         <p>نوفر خدمة تخزين الأثاث في مستودعات آمنة ومجهزة للحفاظ على ممتلكاتك لفترات قصيرة أو طويلة حسب حاجتك في المعادي وحلوان.</p>
-                        <a href="tel:01033278083" class="service-btn call-trigger">
+                        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">
                             <i class="fas fa-arrow-left"></i>
                             المزيد عن التخزين
                         </a>
@@ -1813,7 +1768,7 @@
                         </li>
                         <li>
                             <i class="fas fa-phone-alt"></i>
-                            <a href="tel:01033278083" class="call-trigger" style="color: var(--green);">01033278083</a>
+                            <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style">01033278083</a>
                         </li>
                         <li>
                             <i class="fab fa-whatsapp"></i>
@@ -1836,8 +1791,7 @@
         </div>
     </footer>
 
-    <div id="universalCallModalOverlay" class="call-modal-overlay">
-        <div class="call-modal-content">
+    <div id="universalCallModalOverlay" class="call-modal-overlay"> <div class="call-modal-content">
             <div id="universalInitialQuestion">
                 <p class="text-lg font-semibold text-gray-800 mb-3 text-center">طلب خدمة نقل الأثاث</p>
                 <p class="text-gray-700 mb-4 text-sm text-center">هل أنت جاد في طلب خدمة نقل الأثاث الآن وترغب في التحدث إلينا؟</p>
@@ -1858,7 +1812,7 @@
             </div>
         </div>
     </div>
-    <a href="tel:01033278083" class="floating-call-btn-left call-trigger">
+    <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger floating-call-btn-left" id="floating-call-button">
         <i class="fa fa-phone floating-btn-icon"></i>
         <span class="floating-btn-text">
         01033278083 <span class="floating-btn-action-text-part">(إتصل الأن)</span>
@@ -1872,17 +1826,19 @@
         const closeMenu = document.querySelector('.close-menu');
         const overlay = document.querySelector('.overlay');
         const navLinks = document.querySelectorAll('.nav-menu a');
+        const mobileMenu = document.querySelector('.nav-menu');
+
 
         function closeMobileMenu() {
-            navMenu.classList.remove('active');
-            overlay.classList.remove('active');
+            if (navMenu) navMenu.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
             document.body.style.overflow = '';
         }
 
         if (mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', () => {
-                navMenu.classList.add('active');
-                overlay.classList.add('active');
+                if (navMenu) navMenu.classList.add('active');
+                if (overlay) overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
         }
@@ -1896,10 +1852,22 @@
         }
 
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                // Check if the link is a call trigger, if so, the modal logic will handle it
-                if (!link.classList.contains('call-trigger')) {
-                    if (window.innerWidth <= 768) { // Close only on mobile for non-call links
+            link.addEventListener('click', (e) => {
+                if (!link.classList.contains('universal-call-trigger')) { 
+                    if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+                        const href = link.getAttribute('href');
+                        if (href !== '#_universal_call_confirm' && href !== '#_modal_active') {
+                           e.preventDefault();
+                           const targetId = link.getAttribute('href');
+                            if (targetId.length > 1) {
+                                const targetElement = document.querySelector(targetId);
+                                if (targetElement) {
+                                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }
+                        }
+                    }
+                    if (window.innerWidth <= 768 && navMenu && navMenu.classList.contains('active')) {
                         closeMobileMenu();
                     }
                 }
@@ -1915,75 +1883,56 @@
         let slideInterval;
 
         function showSlide(index) {
-            if (slides.length === 0 || !dots[index]) return; // Added check for dots[index]
+            if (slides.length === 0 || !dots[index]) return; 
             slides.forEach(slide => slide.classList.remove('active'));
             dots.forEach(dot => dot.classList.remove('active'));
-
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
+            if(slides[index]) slides[index].classList.add('active');
+            if(dots[index]) dots[index].classList.add('active');
             currentSlide = index;
         }
-
         function startSlideShow() {
-            stopSlideShow(); // Clear existing interval before starting a new one
+            stopSlideShow(); 
             if (slides.length > 0) {
                 slideInterval = setInterval(() => {
                     currentSlide = (currentSlide + 1) % slides.length;
                     showSlide(currentSlide);
-                }, 5000); // Change slide every 5 seconds
+                }, 5000); 
             }
         }
-
-        function stopSlideShow() {
-            clearInterval(slideInterval);
-        }
-
+        function stopSlideShow() { clearInterval(slideInterval); }
         if (dots.length > 0) {
             dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    showSlide(index);
-                    startSlideShow(); // Restart slideshow on manual navigation
-                });
+                dot.addEventListener('click', () => { showSlide(index); startSlideShow(); });
             });
         }
-
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
                 currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-                startSlideShow(); // Restart slideshow
+                showSlide(currentSlide); startSlideShow(); 
             });
         }
-
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
                 currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-                startSlideShow(); // Restart slideshow
+                showSlide(currentSlide); startSlideShow(); 
             });
         }
+        if (slides.length > 0 && dots.length > 0) { showSlide(0); startSlideShow(); }
 
-        if (slides.length > 0 && dots.length > 0) {
-            showSlide(0);
-            startSlideShow();
-        }
 
         // Testimonials Slider
         const testimonialSlides = document.querySelectorAll('.testimonial-slide');
         const testimonialDots = document.querySelectorAll('.testimonial-dot');
         let currentTestimonial = 0;
         let testimonialInterval;
-
         function showTestimonial(index) {
-            if (testimonialSlides.length === 0 || !testimonialDots[index]) return; // Added check
+            if (testimonialSlides.length === 0 || !testimonialDots[index]) return; 
             testimonialSlides.forEach(slide => slide.classList.remove('active'));
             testimonialDots.forEach(dot => dot.classList.remove('active'));
-
-            testimonialSlides[index].classList.add('active');
-            testimonialDots[index].classList.add('active');
+            if(testimonialSlides[index]) testimonialSlides[index].classList.add('active');
+            if(testimonialDots[index]) testimonialDots[index].classList.add('active');
             currentTestimonial = index;
         }
-
         function startTestimonialSlideShow() {
             stopTestimonialSlideShow();
             if (testimonialSlides.length > 0) {
@@ -1993,53 +1942,38 @@
                 }, 4000);
             }
         }
-
-        function stopTestimonialSlideShow() {
-            clearInterval(testimonialInterval);
-        }
-
+        function stopTestimonialSlideShow() { clearInterval(testimonialInterval); }
         if (testimonialDots.length > 0) {
             testimonialDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    showTestimonial(index);
-                    startTestimonialSlideShow();
-                });
+                dot.addEventListener('click', () => { showTestimonial(index); startTestimonialSlideShow(); });
             });
         }
+        if (testimonialSlides.length > 0 && testimonialDots.length > 0) { showTestimonial(0); startTestimonialSlideShow(); }
 
-        if (testimonialSlides.length > 0 && testimonialDots.length > 0) {
-            showTestimonial(0);
-            startTestimonialSlideShow();
-        }
-
-        // Smooth scrolling for anchor links (excluding call triggers)
+        // Smooth scrolling (general, excluding modal triggers)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            if (!anchor.classList.contains('call-trigger')) { // Only apply to non-call-trigger anchors
+            if (!anchor.classList.contains('universal-call-trigger')) {
                 anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
                     const targetId = this.getAttribute('href');
-                    if (targetId.length > 1) {
+                    if (targetId && targetId.startsWith('#') && targetId.length > 1 && targetId !== '#_universal_call_confirm' && targetId !== '#_modal_active') {
                         const targetElement = document.querySelector(targetId);
                         if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth'
-                            });
+                            e.preventDefault(); 
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
                         }
                     }
                 });
             }
         });
 
-
         function setViewportHeight() {
             const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
-
         setViewportHeight();
         window.addEventListener('resize', setViewportHeight);
 
-        // Universal Call Modal Logic
+        // MODIFIED UNIVERSAL CALL MODAL LOGIC
         const universalCallModalOverlay = document.getElementById('universalCallModalOverlay');
         const universalInitialQuestion = document.getElementById('universalInitialQuestion');
         const universalCallAction = document.getElementById('universalCallAction');
@@ -2048,40 +1982,80 @@
         const universalCloseModalFinal = document.getElementById('universalCloseModalFinal');
         const universalDirectCallLink = document.getElementById('universalDirectCallLink');
 
-        let originalCallLinkHref = ''; // To store the href of the clicked call button
+        let modalOriginalCallLinkHref = 'tel:01033278083'; 
+        let lastTriggeredCallButton = null; 
 
-        function openUniversalCallModal(event) {
-            event.preventDefault(); // Prevent default link behavior
-            originalCallLinkHref = event.currentTarget.href; // Get the tel: link from the clicked element
-            universalDirectCallLink.href = originalCallLinkHref; // Set the direct call link in the modal
+        function showUniversalCallModal(event) {
+            if (event) {
+                event.preventDefault(); 
+                lastTriggeredCallButton = event.currentTarget; 
 
-            // Reset modal to initial state
-            universalInitialQuestion.classList.remove('hidden');
-            universalCallAction.classList.add('hidden');
-            universalCallModalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
+                let phoneNumberFromDataAttribute = null;
+                let hrefValue = lastTriggeredCallButton.getAttribute('href');
 
-        function closeUniversalCallModal() {
-            universalCallModalOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore background scrolling
-             // Reset modal to initial state for next time
-            setTimeout(() => { // Delay reset to allow fade-out animation
-                universalInitialQuestion.classList.remove('hidden');
-                universalCallAction.classList.add('hidden');
-            }, 300);
-        }
-
-        // Add event listeners to all elements that should trigger the call modal
-        document.querySelectorAll('.call-trigger, a[href^="tel:"]').forEach(trigger => {
-            // Check if the link is part of the modal itself to prevent nested triggers
-            if (!trigger.closest('#universalCallModalOverlay')) {
-                 trigger.addEventListener('click', openUniversalCallModal);
+                if (hrefValue === '#_universal_call_confirm') {
+                    phoneNumberFromDataAttribute = lastTriggeredCallButton.dataset.tel || lastTriggeredCallButton.getAttribute('data-tel');
+                    if (phoneNumberFromDataAttribute) {
+                        modalOriginalCallLinkHref = `tel:${phoneNumberFromDataAttribute}`;
+                    } else {
+                        console.warn("Universal call trigger missing data-tel:", lastTriggeredCallButton);
+                        modalOriginalCallLinkHref = 'tel:01033278083'; 
+                    }
+                    lastTriggeredCallButton.setAttribute('data-original-href', hrefValue); 
+                    lastTriggeredCallButton.href = '#_modal_active'; 
+                } else if (lastTriggeredCallButton && lastTriggeredCallButton.href && lastTriggeredCallButton.href.startsWith('tel:')) {
+                    modalOriginalCallLinkHref = lastTriggeredCallButton.href;
+                    lastTriggeredCallButton.setAttribute('data-original-href', modalOriginalCallLinkHref);
+                    lastTriggeredCallButton.href = '#_modal_active';
+                } else {
+                    console.warn("Unexpected call trigger:", lastTriggeredCallButton);
+                    modalOriginalCallLinkHref = 'tel:01033278083'; 
+                    if(lastTriggeredCallButton) {
+                         lastTriggeredCallButton.setAttribute('data-original-href', 'no-tel-link-or-confirm');
+                    }
+                }
             }
-        });
 
+            if (universalCallModalOverlay && universalDirectCallLink) {
+                universalDirectCallLink.href = modalOriginalCallLinkHref;
+                const phoneNumberText = modalOriginalCallLinkHref.replace('tel:', '');
+                universalDirectCallLink.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="vertical-align: middle;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                    </svg>
+                    ${phoneNumberText}
+                `;
 
-        if (universalConfirmCallBtn) {
+                if (universalInitialQuestion) universalInitialQuestion.classList.remove('hidden');
+                if (universalCallAction) universalCallAction.classList.add('hidden');
+                universalCallModalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function hideUniversalCallModal() {
+            if (universalCallModalOverlay) {
+                universalCallModalOverlay.classList.remove('active'); 
+                document.body.style.overflow = '';
+
+                if (lastTriggeredCallButton) {
+                    const originalHref = lastTriggeredCallButton.getAttribute('data-original-href');
+                    if (originalHref && originalHref !== 'no-tel-link-or-confirm') {
+                        lastTriggeredCallButton.href = originalHref; 
+                    } else if (originalHref === 'no-tel-link-or-confirm' && !lastTriggeredCallButton.href.startsWith('tel:') && lastTriggeredCallButton.href !== '#_universal_call_confirm') {
+                    }
+                    lastTriggeredCallButton.removeAttribute('data-original-href');
+                    lastTriggeredCallButton = null; 
+                }
+                
+                setTimeout(() => {
+                    if (universalInitialQuestion) universalInitialQuestion.classList.remove('hidden');
+                    if (universalCallAction) universalCallAction.classList.add('hidden');
+                }, 300); 
+            }
+        }
+
+        if (universalConfirmCallBtn && universalInitialQuestion && universalCallAction) {
             universalConfirmCallBtn.addEventListener('click', () => {
                 universalInitialQuestion.classList.add('hidden');
                 universalCallAction.classList.remove('hidden');
@@ -2089,25 +2063,36 @@
         }
 
         if (universalCancelCallBtn) {
-            universalCancelCallBtn.addEventListener('click', closeUniversalCallModal);
-        }
-        if (universalCloseModalFinal) {
-            universalCloseModalFinal.addEventListener('click', closeUniversalCallModal);
+            universalCancelCallBtn.addEventListener('click', hideUniversalCallModal);
         }
 
-        // Close modal if user clicks on the overlay (outside the content)
+        if (universalCloseModalFinal) {
+            universalCloseModalFinal.addEventListener('click', hideUniversalCallModal);
+        }
+
         if (universalCallModalOverlay) {
-            universalCallModalOverlay.addEventListener('click', (event) => {
+            universalCallModalOverlay.addEventListener('click', function(event) {
                 if (event.target === universalCallModalOverlay) {
-                    closeUniversalCallModal();
+                    hideUniversalCallModal();
                 }
             });
         }
-
-        // Close modal with Escape key
+        
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && universalCallModalOverlay.classList.contains('active')) {
-                closeUniversalCallModal();
+            if (event.key === 'Escape' && universalCallModalOverlay && universalCallModalOverlay.classList.contains('active')) {
+                hideUniversalCallModal();
+            }
+        });
+
+        const callTriggers = document.querySelectorAll('.universal-call-trigger'); 
+        callTriggers.forEach(button => {
+            if (!button.closest('#universalCallModalOverlay')) { 
+                button.addEventListener('click', function(event) {
+                    showUniversalCallModal(event);
+                    if (mobileMenu && mobileMenu.classList.contains('active') && mobileMenu.contains(this)) {
+                        closeMobileMenu();
+                    }
+                });
             }
         });
 
