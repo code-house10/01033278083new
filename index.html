@@ -39,6 +39,8 @@
             --green: #25D366;
             /* WhatsApp Green */
             --success-color: #28a745; /* Added for modal buttons */
+            --discount-banner-bg: #ffc107; /* Yellow for discount */
+            --discount-banner-text: #333;
         }
 
         * {
@@ -53,6 +55,7 @@
             color: var(--dark-gray);
             background-color: var(--white);
             overflow-x: hidden;
+            padding-bottom: 100px; /* Add padding to prevent content overlap with floating banner */
         }
 
         a {
@@ -979,6 +982,9 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding-bottom: 120px; /* Adjust for potentially taller banner on mobile */
+            }
             .hero {
                 height: auto;
                 min-height: 500px;
@@ -1188,7 +1194,8 @@
         .floating-call-btn-left {
             position: fixed;
             left: 20px;
-            bottom: 20px;
+            /* bottom: 20px; */ /* Adjusted by discount banner */
+            bottom: 90px; /* Example: Adjust if discount banner is ~70px high + 20px spacing */
             z-index: 1050;
             display: flex;
             align-items: center;
@@ -1233,7 +1240,8 @@
                 padding: 8px 12px;
                 font-size: 0.9rem;
                 left: 15px;
-                bottom: 15px;
+                /* bottom: 15px; */ /* Adjusted by discount banner */
+                bottom: 105px; /* Example: Adjust if discount banner is ~90px high + 15px spacing on mobile */
             }
             .floating-btn-icon { font-size: 1.1rem; }
             .floating-btn-text { margin-right: 6px; }
@@ -1292,6 +1300,78 @@
         .bg-success:hover {
             background-color: #218838 !important;
         }
+
+        /* Discount Banner Styles */
+        .discount-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--discount-banner-bg);
+            color: var(--discount-banner-text);
+            padding: 10px 15px;
+            text-align: center;
+            z-index: 1060; /* Higher than floating call button if it should be above */
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            border-top: 2px solid var(--primary-color);
+        }
+        .discount-banner p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .discount-banner .countdown-timer {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .discount-banner .timer-segment {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 2px 5px;
+            background-color: rgba(0,0,0,0.1);
+            border-radius: 3px;
+        }
+        .discount-banner .timer-label {
+            font-size: 0.7rem;
+            display: block;
+            color: var(--dark-gray);
+        }
+        .discount-banner-close {
+            position: absolute;
+            top: 5px;
+            left: 15px; /* Adjusted to left for RTL */
+            font-size: 1.5rem;
+            color: var(--discount-banner-text);
+            cursor: pointer;
+            line-height: 1;
+            padding: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .discount-banner {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+                padding: 12px 15px;
+            }
+            .discount-banner p {
+                font-size: 1.1rem;
+            }
+            .discount-banner .countdown-timer {
+                font-size: 1.2rem;
+            }
+             .discount-banner-close {
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
     </style>
 </head>
 
@@ -1812,12 +1892,27 @@
             </div>
         </div>
     </div>
+
     <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger floating-call-btn-left" id="floating-call-button">
         <i class="fa fa-phone floating-btn-icon"></i>
         <span class="floating-btn-text">
         01033278083 <span class="floating-btn-action-text-part">(إتصل الأن)</span>
         </span>
     </a>
+
+    <div class="discount-banner" id="discountBanner">
+        <span class="discount-banner-close" id="closeDiscountBanner">&times;</span>
+        <p>🎉 عرض خاص! خصم 25% لفترة محدودة!</p>
+        <div class="countdown-timer" id="countdownTimer">
+            <span class="timer-segment"><span id="hours">00</span><span class="timer-label">ساعة</span></span>
+            <span class="timer-segment"><span id="minutes">00</span><span class="timer-label">دقيقة</span></span>
+            <span class="timer-segment"><span id="seconds">00</span><span class="timer-label">ثانية</span></span>
+        </div>
+        <a href="#_universal_call_confirm" data-tel="01033278083" class="universal-call-trigger universal-call-trigger-style" style="padding: 8px 15px; margin-top: 5px; background-color: var(--primary-color); border-color: var(--primary-color);">
+            استفد من العرض الآن!
+        </a>
+    </div>
+
 
     <script>
         // Mobile Menu Toggle
@@ -2043,6 +2138,7 @@
                     if (originalHref && originalHref !== 'no-tel-link-or-confirm') {
                         lastTriggeredCallButton.href = originalHref; 
                     } else if (originalHref === 'no-tel-link-or-confirm' && !lastTriggeredCallButton.href.startsWith('tel:') && lastTriggeredCallButton.href !== '#_universal_call_confirm') {
+                        // Do nothing if it was not a proper call link or confirm link initially
                     }
                     lastTriggeredCallButton.removeAttribute('data-original-href');
                     lastTriggeredCallButton = null; 
@@ -2086,15 +2182,103 @@
 
         const callTriggers = document.querySelectorAll('.universal-call-trigger'); 
         callTriggers.forEach(button => {
+            // Ensure we are not re-attaching listeners to buttons inside the modal itself
             if (!button.closest('#universalCallModalOverlay')) { 
                 button.addEventListener('click', function(event) {
                     showUniversalCallModal(event);
+                    // If the trigger is inside the mobile menu, close the menu
                     if (mobileMenu && mobileMenu.classList.contains('active') && mobileMenu.contains(this)) {
                         closeMobileMenu();
                     }
                 });
             }
         });
+
+        // Discount Banner Countdown Timer
+        const countdownElement = document.getElementById('countdownTimer');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+        const discountBanner = document.getElementById('discountBanner');
+        const closeDiscountBannerBtn = document.getElementById('closeDiscountBanner');
+
+        // Set countdown duration (e.g., 2 hours from now)
+        const countdownDuration = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+        let countDownDate = new Date().getTime() + countdownDuration;
+
+        // Check if a countdown end time is already stored (e.g., if user reloads page)
+        const storedCountDownDate = localStorage.getItem('discountCountDownDate');
+        if (storedCountDownDate) {
+            const parsedStoredDate = parseInt(storedCountDownDate, 10);
+            if (parsedStoredDate > new Date().getTime()) { // If stored time is still in the future
+                countDownDate = parsedStoredDate;
+            } else { // Stored time has passed, reset it
+                 localStorage.removeItem('discountCountDownDate');
+                 localStorage.removeItem('discountBannerClosed'); // Also reset closed state
+            }
+        }
+        localStorage.setItem('discountCountDownDate', countDownDate.toString());
+
+
+        // Check if banner was previously closed
+        if (localStorage.getItem('discountBannerClosed') === 'true') {
+            if (discountBanner) discountBanner.style.display = 'none';
+        }
+
+
+        const updateCountdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (hoursElement) hoursElement.innerHTML = hours < 10 ? "0" + hours : hours;
+            if (minutesElement) minutesElement.innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            if (secondsElement) secondsElement.innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(updateCountdown);
+                if(countdownElement) countdownElement.innerHTML = "انتهى العرض!";
+                if(discountBanner) {
+                    // Optionally hide the banner or change message after expiry
+                    // discountBanner.style.display = 'none'; 
+                }
+                localStorage.removeItem('discountCountDownDate');
+                localStorage.removeItem('discountBannerClosed');
+            }
+        }, 1000);
+
+        if (closeDiscountBannerBtn && discountBanner) {
+            closeDiscountBannerBtn.addEventListener('click', function() {
+                discountBanner.style.display = 'none';
+                localStorage.setItem('discountBannerClosed', 'true');
+                // Adjust floating call button position if it was moved due to banner
+                const floatingCallBtn = document.getElementById('floating-call-button');
+                if(floatingCallBtn) {
+                    floatingCallBtn.style.bottom = '20px'; // Reset to original position
+                     if (window.innerWidth <= 768) {
+                        floatingCallBtn.style.bottom = '15px';
+                    }
+                }
+                 document.body.style.paddingBottom = '0'; // Reset body padding
+            });
+        }
+         // Adjust floating call button position initially if banner is visible
+        if (discountBanner && discountBanner.style.display !== 'none') {
+            const floatingCallBtn = document.getElementById('floating-call-button');
+            if(floatingCallBtn) {
+                // The values here should match the ones in CSS for .floating-call-btn-left when banner is active
+                // e.g., bottom: 90px; for desktop, bottom: 105px; for mobile
+                // These are set directly in the CSS now, so this JS adjustment might not be strictly necessary
+                // unless you want dynamic adjustment based on banner height.
+            }
+        } else {
+            // If banner is not visible (e.g. closed or expired), ensure body padding is reset
+            document.body.style.paddingBottom = '0';
+        }
+
 
     </script>
 </body>
